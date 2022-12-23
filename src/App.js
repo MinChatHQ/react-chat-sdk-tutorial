@@ -1,23 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import { MainContainer, ChatContainer, MessageList, Message, MessageInput } from "@chatscope/chat-ui-kit-react";
+import { useMinChat, useMessages } from '@minchat/react';
+
+const secondUser = {
+  id: "mercy",
+  name: "Mercy Wells",
+}
 
 function App() {
+  const minchat = useMinChat()
+
+  const chat = minchat.chat(secondUser)
+
+  const { messages, sendMessage } = useMessages(chat)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ position: "relative", height: "500px", width: "500px" }}>
+      <MainContainer>
+        <ChatContainer>
+          <MessageList>
+            {messages && messages.map((message) => {
+              return message.user.id === 'mercy' ?
+                <Message
+                  model={{
+                    message: message.text,
+                    sender: message.user.name,
+                  }}
+                /> :
+                <div style={{ justifyContent: "flex-end", display: "flex" }}>
+                  <Message
+                    model={{
+                      message: message.text,
+                      sender: message.user.name,
+                    }}
+                  />
+                </div>
+            })
+            }
+
+          </MessageList>
+          <MessageInput
+            onSend={(_, textContent) => sendMessage({ text: textContent })}
+            placeholder="Type message here" />
+        </ChatContainer>
+      </MainContainer>
     </div>
   );
 }
