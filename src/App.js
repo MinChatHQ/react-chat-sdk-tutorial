@@ -34,7 +34,7 @@ import { useEffect, useState } from "react";
           <ChatContainer>
             <MessageList>
               {messages && messages.map((message) => {
-                return message.user.id === 'mercy' ?
+                return message.user.username === 'mercy' ?
                   <Message
                     model={{
                       message: message.text,
