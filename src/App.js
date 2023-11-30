@@ -4,7 +4,6 @@ import { useMinChat, useMessages } from '@minchat/react';
 import { useEffect, useState } from "react";
 
   function App() {
-    const [secondUser, setSecondUser] = useState()
     const [chat,setChat] = useState()
 
     const minchat = useMinChat()
@@ -17,10 +16,6 @@ import { useEffect, useState } from "react";
             name: "Mercy Wells",
           })
 
-          console.log({user})
-
-          setSecondUser(user)
-
           // create chat object
           const chatObj = await minchat.chat(user.username)
           setChat(chatObj)
@@ -30,7 +25,6 @@ import { useEffect, useState } from "react";
       createUser()
 
     }, [minchat])
-
 
     const { messages, sendMessage } = useMessages(chat)
 
