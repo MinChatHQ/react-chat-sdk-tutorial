@@ -7,14 +7,14 @@ import { MinChatProvider } from '@minchat/react';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const firstUser = {
-  id: "micheal",
+  username: "micheal",
   name: "Micheal Saunders",
 }
 
 root.render(
   <React.StrictMode>
     <MinChatProvider
-      apiKey={906373408}
+      apiKey={"YOUR_API_KEY"}
       user={firstUser} >
       <App />
     </MinChatProvider>
